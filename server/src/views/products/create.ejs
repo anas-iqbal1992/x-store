@@ -1,0 +1,259 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="POST" action="/product/create" enctype='multipart/form-data'>
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Category</label><br />
+                                        <select
+                                            class="w-100 form-control select-category <%= formErrors.category ? 'is-invalid' :'' %>"
+                                            name="category">
+                                            <option value="">Select option..</option>
+                                            <% for (let key in category) { %>
+                                            <option value="<%- key %>" <%= formData.category == key ? 'selected':'' %>><%- category[key] %></option>
+                                            <% } %>
+                                        </select>
+                                        <% if(formErrors.category){ %>
+                                        <div class="invalid-feedback">
+                                            <%- formErrors.category.msg %>
+                                        </div>
+                                        <% } %>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Sub Category</label><br />
+                                        <select value="<%= formData.subcategory %>"
+                                            class="w-100 form-control select-subcategory <%= formErrors.subcategory ? 'is-invalid' :'' %>"
+                                            name="subcategory">
+                                        </select>
+                                        <% if(formErrors.subcategory){ %>
+                                        <div class="invalid-feedback">
+                                            <%- formErrors.subcategory.msg %>
+                                        </div>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Brand</label><br />
+                                        <select
+                                            class="w-100 form-control select-brand <%= formErrors.brand ? 'is-invalid' :'' %>"
+                                            name="brand">
+                                            <option value="">Select option..</option>
+                                            <% for (let key in brands) { %>
+                                            <option value="<%- key %>" <%= formData.brand == key ? 'selected':'' %>><%- brands[key] %></option>
+                                            <% } %>
+                                        </select>
+                                        <% if(formErrors.brand){ %>
+                                        <div class="invalid-feedback">
+                                            <%- formErrors.brand.msg %>
+                                        </div>
+                                        <% } %>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Price</label><br />
+                                        <input type="text"
+                                            class="form-control <%= formErrors.price ? 'is-invalid' :'' %>" name="price"
+                                            value="<%= formData.price %>" placeholder="Enter Product Price">
+                                        <% if(formErrors.price){ %>
+                                        <div class="invalid-feedback">
+                                            <%- formErrors.price.msg %>
+                                        </div>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Name</label>
+                                        <input type="text"
+                                            class="form-control <%= formErrors.name ? 'is-invalid' :'' %>" name="name"
+                                            value="<%= formData.name %>" placeholder="Enter Product Name">
+                                        <% if(formErrors.name){ %>
+                                        <div class="invalid-feedback">
+                                            <%- formErrors.name.msg %>
+                                        </div>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="row">
+                                <div class="col-lg-8 offset-lg-2 text-center">
+                                    <img src="/images/product-upload.png" class="rounded file-upload" id="pre_main"
+                                        data-id="main_img" width="150">
+                                    <input accept="image/*" type="file" class="visuallyhidden" name="main_images"
+                                        data-id="pre_main" id="main_img" class="visuallyhidden">
+                                    <% if(formErrors.main_images){ %>
+                                    <div style="display: block;" class="invalid-feedback">
+                                        <%- formErrors.main_images %>
+                                    </div>
+                                    <% } %>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <img src="/images/product-upload.png" class="rounded file-upload" id="pre_img_1"
+                                        data-id="other_img_1" width="100">
+                                    <input accept="image/*" type="file" class="visuallyhidden" name="other_images_1"
+                                        data-id="pre_img_1" id="other_img_1" class="visuallyhidden">
+                                    <% if(formErrors.other_images_1){ %>
+                                    <div style="display: block;" class="invalid-feedback">
+                                        <%- formErrors.other_images_1 %>
+                                    </div>
+                                    <% } %>
+                                </div>
+                                <div class="col-lg-4">
+                                    <img src="/images/product-upload.png" class="rounded file-upload" id="pre_img_2"
+                                        data-id="other_img_2" width="100">
+                                    <input accept="image/*" type="file" class="visuallyhidden" name="other_images_2"
+                                        data-id="pre_img_2" id="other_img_2" class="visuallyhidden">
+                                    <% if(formErrors.other_images_2){ %>
+                                    <div style="display: block;" class="invalid-feedback">
+                                        <%- formErrors.other_images_2 %>
+                                    </div>
+                                    <% } %>
+                                </div>
+                                <div class="col-lg-4">
+                                    <img src="/images/product-upload.png" class="rounded file-upload" id="pre_img_3"
+                                        data-id="other_img_3" width="100">
+                                    <input accept="image/*" type="file" class="visuallyhidden" name="other_images_3"
+                                        data-id="pre_img_3" id="other_img_3" id="other_img_3" class="visuallyhidden">
+                                    <% if(formErrors.other_images_3){ %>
+                                    <div style="display: block;" class="invalid-feedback">
+                                        <%- formErrors.other_images_3 %>
+                                    </div>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Barcode</label>
+                                <input type="text" class="form-control <%= formErrors.barcode ? 'is-invalid' :'' %>"
+                                    name="barcode" value="<%= formData.barcode %>" placeholder="Enter Product barcode">
+                                <% if(formErrors.barcode){ %>
+                                <div class="invalid-feedback">
+                                    <%- formErrors.barcode.msg %>
+                                </div>
+                                <% } %>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Offer</label>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <input type="text"
+                                            class="form-control <%= formErrors.offer_upto ? 'is-invalid' :'' %>"
+                                            name="offer_upto"
+                                            value="<%- formData.offer_upto %>"
+                                            placeholder="Enter Offer Value">
+                                        <% if(formErrors.offer_upto){ %>
+                                        <div class="invalid-feedback">
+                                            <%- formErrors.offer_upto.msg %>
+                                        </div>
+                                        <% } %>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <select 
+                                            class="form-control <%= formErrors.offer_unit ? 'is-invalid' :'' %>"
+                                            name="offer_unit">
+                                            <option value="">Select Unit..</option>
+                                            <option value="per" <%= formData.offer_unit == 'per' ? 'selected':'' %>>%</option>
+                                            <option value="flat" <%= formData.offer_unit == 'flat' ? 'selected':'' %>>Flat</option>
+                                        </select>
+                                        <% if(formErrors.offer_unit){ %>
+                                        <div class="invalid-feedback">
+                                            <%- formErrors.offer_unit.msg %>
+                                        </div>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Return (Days)</label>
+                                <input type="text" class="form-control <%= formErrors.return_days ? 'is-invalid' :'' %>"
+                                    name="return_days" value="<%= formData.return_days %>"
+                                    placeholder="Enter Return Days">
+                                <% if(formErrors.return_days){ %>
+                                <div class="invalid-feedback">
+                                    <%- formErrors.return_days.msg %>
+                                </div>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Specification</label><br />
+                                <textarea class="summernote" name="specification" id="specification"><%= formData.specification ? formData.specification :'' %></textarea>
+                                <% if(formErrors.specification){ %>
+                                <div style="display: block;" class="invalid-feedback">
+                                    <%- formErrors.specification.msg %>
+                                </div>
+                                <% } %>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Key Features</label><br />
+                                <textarea class="summernote" name="feature" id="feature"><%= formData.feature ? formData.feature :'' %></textarea>
+                                <% if(formErrors.feature){ %>
+                                <div style="display: block;" class="invalid-feedback">
+                                    <%- formErrors.feature.msg %>
+                                </div>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Description</label><br />
+                                <textarea class="summernote" name="description" id="description"><%= formData.description ? formData.description :'' %></textarea>
+                                <% if(formErrors.description){ %>
+                                <div class="invalid-feedback">
+                                    <%- formErrors.description.msg %>
+                                </div>
+                                <% } %>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Other</label><br />
+                                <textarea class="summernote" name="other" id="other"><%= formData.other ? formData.other :'' %></textarea>
+                                <% if(formErrors.other){ %>
+                                <div class="invalid-feedback">
+                                    <%- formErrors.other.msg %>
+                                </div>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 text-right">
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

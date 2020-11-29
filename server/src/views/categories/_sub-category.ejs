@@ -1,0 +1,18 @@
+<div class="row" id="subcat-<%- i  %>">
+    <div class="col-lg-10">
+        <div class="form-group">
+            <label>Sub Category Name</label>
+            <input type="text" class="form-control" name="subcategory[<%- i  %>][subCatname]" placeholder="Enter Category Name">
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <textarea name="subcategory[<%- i  %>][subCatdescription]" class="form-control" rows="2"></textarea>
+        </div>
+    </div>
+    <div class="col-lg-2">
+        <br />
+        <a href="#" data-id="<%- i %>" class="btn btn-xs btn-danger remove-sub">
+            <i class="fa fa-minus"></i>
+        </a>
+    </div>
+</div>

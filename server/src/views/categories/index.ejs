@@ -1,0 +1,45 @@
+<div class="card">
+    <div class="card-body text-center">
+        <a href="/category/create" class="btn btn-primary">
+            Add Category
+        </a>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <table data-toggle="table" data-pagination="true" data-search="true">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th data-sortable="true">Category Name</th>
+                    <th>Status</th>
+                    <th>Created At</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% let i = 1;
+                    model.docs.forEach(data => { %>
+                <tr>
+                    <td><%- i %></td>
+                    <td><%- data.name %></td>
+                    <td>
+                        <span class="badge badge-<%= data.status ? 'success':'warning' %>">
+                            <%= data.status? 'Active':'InActive' %>
+                        </span>
+                    </td>
+                    <td><%- dateFormat(data.createdAt) %></td>
+                    <td>
+                        <a href="/category/edit/<%- data._id %>">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a href="/category/view/<%- data._id %>">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                    </td>
+                </tr>
+                <% i++ }); %>
+            </tbody>
+        </table>
+    </div>
+</div>

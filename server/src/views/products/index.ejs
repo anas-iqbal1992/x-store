@@ -1,0 +1,49 @@
+<div class="card">
+    <div class="card-body text-center">
+        <a href="/product/create" class="btn btn-primary">
+            Add Product
+        </a>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <table data-toggle="table" data-pagination="true" data-search="true">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th data-sortable="true">Product Name</th>
+                    <th data-sortable="true">Category</th>
+                    <th data-sortable="true">SubCategory</th>
+                    <th>Status</th>
+                    <th>Created At</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% let i = 1;
+                    model.docs.forEach(data => { %>
+                <tr>
+                    <td><%- i %></td>
+                    <td><%- data.name %></td>
+                    <td><%- data.category.name %></td>
+                    <td><%- data.subcategory.name %></td>
+                    <td>
+                        <span class="badge badge-<%= data.status ? 'success':'warning' %>">
+                            <%= data.status? 'Active':'InActive' %>
+                        </span>
+                    </td>
+                    <td><%- dateFormat(data.createdAt) %></td>
+                    <td>
+                        <a href="/category/edit/<%- data._id %>">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a href="/category/view/<%- data._id %>">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                    </td>
+                </tr>
+                <% i++ }); %>
+            </tbody>
+        </table>
+    </div>
+</div>
