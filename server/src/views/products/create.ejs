@@ -43,14 +43,17 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Brand</label><br />
-                                        <select
+                                        <input type="text"
+                                        class="form-control <%= formErrors.brand ? 'is-invalid' :'' %>" name="brand"
+                                        value="<%= formData.brand %>" placeholder="Enter Product brand">
+                                        <!-- <select
                                             class="w-100 form-control select-brand <%= formErrors.brand ? 'is-invalid' :'' %>"
                                             name="brand">
                                             <option value="">Select option..</option>
                                             <% for (let key in brands) { %>
                                             <option value="<%- key %>" <%= formData.brand == key ? 'selected':'' %>><%- brands[key] %></option>
                                             <% } %>
-                                        </select>
+                                        </select> -->
                                         <% if(formErrors.brand){ %>
                                         <div class="invalid-feedback">
                                             <%- formErrors.brand.msg %>

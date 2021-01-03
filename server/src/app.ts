@@ -45,5 +45,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(logger('dev'));
 require("./routes/backendRoutes")(app);
+require("./apiroutes/frontendRoutes")(app);
 app.listen(process.env.PORT, () => console.log(`server running on ${process.env.PORT} port`));
 export {app};

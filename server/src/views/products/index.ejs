@@ -7,6 +7,7 @@
 </div>
 <div class="card">
     <div class="card-body">
+        Totol Product :<%- model.totalDocs %>
         <table data-toggle="table" data-pagination="true" data-search="true">
             <thead>
                 <tr>
@@ -45,5 +46,51 @@
                 <% i++ }); %>
             </tbody>
         </table>
+        <% if (model. totalPages > 0) { %>
+        <nav class="pull-right">
+            <ul class="pagination">
+                <% if (model.hasPrevPage) { %>
+                <li class="page-item">
+                    <a href="/product/<%= model.prevPage %>" class="page-link">Previous</a>
+                </li>
+                <% } else { %>
+                <li class="page-item disabled">
+                    <span class="page-link">Previous</span>
+                </li>
+                <% } %>
+                <% var j = (Number(model.page) > 5 ? Number(model.page) - 4 : 1) %>
+                <% if (j !== 1) { %>
+                    <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+                <% } %>
+                <% for (; j <= (Number(model.page) + 4) && j <= model.totalPages; j++) { %>
+                    <% if (j == model.page) { %>
+                        <li class="page-item active">
+                            <span class="page-link">
+                                <%= j %>
+                                <span class="sr-only"></span>
+                            </span>
+                        </li>
+                    <% } else { %>
+                        <li class="page-item">
+                            <a class="page-link" href="/product/<%= j %>"><%= j %></a>
+                        </li>
+                    <% } %>
+                    <% if (j == Number(model.page) + 4 && j < model.totalPages) { %>
+                        <li class="disabled"><a>...</a></li>
+                    <% } %>
+                <% } %>
+                
+                <% if (model.hasNextPage) { %>
+                <li class="page-item">
+                    <a href="/product/<%= model.nextPage %>" class="page-link">Next</a>
+                </li>
+                <% } else { %>
+                <li class="page-item disabled">
+                    <span class="page-link">Next</span>
+                </li>
+                <% } %>
+            </ul>
+        </nav>
+        <% } %>
     </div>
 </div>

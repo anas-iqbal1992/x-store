@@ -4,7 +4,7 @@ import { Category } from "../../category/model/Category";
 import { SubCategory } from "../../category/model/SubCategory";
 import { ProductInterface } from "../interface/product";
 import mongoosePaginate from "mongoose-paginate-v2";
-export interface IProduct extends ProductInterface, Document {}
+export interface IProduct extends ProductInterface, Document { }
 const productSchema = new Schema(
   {
     name: {
@@ -35,11 +35,15 @@ const productSchema = new Schema(
     specification: {
       type: String,
     },
-    barcode:{
-        type:String
+    barcode: {
+      type: String
     },
-    return_days:{
-      type:String
+    return_days: {
+      type: String
+    },
+    brand: {
+      type: String,
+      required: true,
     },
     offer: {
       upto: {
@@ -47,7 +51,7 @@ const productSchema = new Schema(
       },
       unit: {
         type: String,
-        enum: ["per", "flat"],
+        enum: ["per", "flat", ""],
       },
     },
     status: {
@@ -59,10 +63,10 @@ const productSchema = new Schema(
       required: true,
     },
     category: { type: Schema.Types.ObjectId, ref: Category },
-    subcategory: { type: Schema.Types.ObjectId,ref: SubCategory},
+    subcategory: { type: Schema.Types.ObjectId, ref: SubCategory },
   },
   { timestamps: true }
 );
 productSchema.plugin(mongoosePaginate);
-interface Product<T extends Document> extends PaginateModel<T> {};
+interface Product<T extends Document> extends PaginateModel<T> { };
 export const Product: Product<IProduct> = model<IProduct>("Product", productSchema) as Product<IProduct>;

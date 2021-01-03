@@ -9,22 +9,7 @@ import { validationResult } from "express-validator";
 import {
   mongooseErrorFormatter,
 } from "./../utils/validationFormatter";
-productRoute.get(
-  "/product",
-  requiredLogin,
-  async (req: express.Request, res: express.Response) => {
-    try {
-      const model = await getProducts(req.query);
-      res.render("products/index", { title: "Products", model });
-    } catch (e) {
-      const msg = {
-        type: "error",
-        body: "Some thing went wrong!",
-      };
-      req.flash('messages', JSON.stringify(msg))
-    }
-  }
-);
+
 productRoute.get(
   "/product/create",
   requiredLogin,
@@ -36,6 +21,22 @@ productRoute.get(
       category,
       brands,
     });
+  }
+);
+productRoute.get(
+  "/product/:page?",
+  requiredLogin,
+  async (req: express.Request, res: express.Response) => {
+    try {
+      const model = await getProducts(req);
+      res.render("products/index", { title: "Products", model });
+    } catch (e) {
+      const msg = {
+        type: "error",
+        body: "Some thing went wrong!",
+      };
+      req.flash('messages', JSON.stringify(msg))
+    }
   }
 );
 productRoute.get(

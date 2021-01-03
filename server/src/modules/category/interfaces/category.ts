@@ -3,4 +3,5 @@ export interface CategoryInterface {
     description:  string;
     status: number;
     reference:string;
+    subCategories:[]
 }

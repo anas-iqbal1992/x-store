@@ -1,5 +1,6 @@
 import multer from "multer";
 import express from "express";
+import  _ from "lodash";
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "");
@@ -47,6 +48,11 @@ const uploadFile = async (req: express.Request, res: express.Response, next: exp
         req.flash('formErrors', JSON.stringify(err))
         req.flash('formData', JSON.stringify(req.body))
       }
+      return res.redirect("/product/create");
+    } else if (_.isEmpty(JSON.parse(JSON.stringify(req.files)))) {
+      err['main_images'] = 'Image is required!'
+      req.flash('formErrors', JSON.stringify(err))
+      req.flash('formData', JSON.stringify(req.body))
       return res.redirect("/product/create");
     }
     next();

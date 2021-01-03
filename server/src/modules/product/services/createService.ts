@@ -2,6 +2,7 @@ import { Product } from "../models/Product";
 import express from "express";
 import AWS from "aws-sdk";
 import fs from 'fs';
+import _ from 'lodash';
 export const uploadImages = async (req: express.Request) => {
     const proFiles: any = req.files;
     let s3bucket = new AWS.S3({
@@ -52,13 +53,14 @@ export const addProduct = async (req: any, dataFiles: { main_images: string, oth
     await model.save();
     return model;
 }
-export const getProducts = async (query: {}) => {
+export const getProducts = async (req: any) => {
+    const page = _.isUndefined(req.params.page) ? 1 : req.params.page;
     const options = {
         sort: { createdAt: -1 },
         lean: true,
-        page: 1,
+        page: page,               
         limit: 10,
-        populate: [{path:"category",select:'name'},{path:"subcategory",select:'name'}]
+        populate: [{ path: "category", select: 'name' }, { path: "subcategory", select: 'name' }]
     };
     return await Product.paginate({ status: 1 }, options);
 };

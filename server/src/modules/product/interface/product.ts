@@ -8,6 +8,7 @@ export interface ProductInterface{
     description:string,
     specification:string,
     barcode:string,
+    brand:string,
     offer:{upto:string,unit:string},
     status:number,
     reference:string,

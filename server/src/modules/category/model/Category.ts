@@ -9,8 +9,9 @@ import {
 import mongoosePaginate from "mongoose-paginate-v2";
 import uniqueValidator from "mongoose-unique-validator";
 import { CategoryInterface } from "../interfaces/category";
+import { SubCategory } from "./SubCategory";
 export interface ICategory extends CategoryInterface, Document {
-  transform():ICategory;
+  transform(): ICategory;
 }
 const categorySchema = new Schema(
   {
@@ -37,9 +38,9 @@ const categorySchema = new Schema(
 );
 categorySchema.plugin(uniqueValidator);
 categorySchema.plugin(mongoosePaginate);
-interface Category<T extends Document> extends PaginateModel<T> {};
+interface Category<T extends Document> extends PaginateModel<T> { };
 const Category: Category<ICategory> = model<ICategory>(
   "Category",
   categorySchema
 ) as Category<ICategory>;
-export {Category};
+export { Category };
